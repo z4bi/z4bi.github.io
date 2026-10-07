@@ -64,28 +64,19 @@ body {
     font-size: 12px;
 }
 
-.toolbar {
-    background: #f5f5f5;
+.section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    background: linear-gradient(#f7f7f7, #dedede);
     border: 1px solid #c7c7c7;
-    padding: 9px;
-    margin-bottom: 15px;
-}
-
-.add-button {
-    background: linear-gradient(#f6a23a, #e47c17);
-    border: 1px solid #bd5d08;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    padding: 8px 15px;
-    border-radius: 3px;
-    text-shadow: 1px 1px rgba(0,0,0,.35);
-    cursor: pointer;
-    box-shadow: inset 0 1px rgba(255,255,255,.35);
-}
-
-.add-button:hover {
-    background: linear-gradient(#ffad48, #eb861d);
+    border-bottom: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,.12);
+    padding: 10px 13px;
+    font-size: 18px;
+    color: #555;
+    font-weight: normal;
 }
 
 .account-grid {
@@ -144,6 +135,13 @@ body {
     margin-bottom: 6px;
 }
 
+.account-age {
+    color: #888;
+    font-size: 13px;
+    font-weight: normal;
+    margin-left: 4px;
+}
+
 .description {
     color: #666;
     font-size: 12px;
@@ -194,21 +192,6 @@ body {
     background: linear-gradient(#ffad48, #eb861d);
 }
 
-.delete-button {
-    position: absolute;
-    right: 6px;
-    top: 7px;
-    border: 0;
-    background: transparent;
-    color: #999;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.delete-button:hover {
-    color: #d00;
-}
-
 .empty {
     background: white;
     border: 1px solid #ccc;
@@ -218,120 +201,8 @@ body {
     grid-column: 1 / -1;
 }
 
-.overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.55);
-    z-index: 20;
-}
-
-.modal {
-    width: 470px;
-    background: #eee;
-    border: 1px solid #222;
-    box-shadow: 0 4px 18px rgba(0,0,0,.5);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.modal-header {
-    height: 38px;
-    background: linear-gradient(#444, #222);
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 11px 13px;
-}
-
-.close {
-    float: right;
-    cursor: pointer;
-    color: #ccc;
-    font-size: 16px;
-}
-
-.close:hover {
-    color: white;
-}
-
-.modal-body {
-    padding: 16px;
-    background: #f5f5f5;
-}
-
-.field {
-    margin-bottom: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 12px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-.field input,
-.field textarea {
-    width: 100%;
-    border: 1px solid #aaa;
-    background: white;
-    padding: 8px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    outline: none;
-}
-
-.field input:focus,
-.field textarea:focus {
-    border-color: #777;
-}
-
-.field textarea {
-    resize: vertical;
-    min-height: 65px;
-}
-
-.modal-footer {
-    padding: 10px 16px 15px;
-    background: #f5f5f5;
-    text-align: right;
-}
-
-.cancel {
-    border: 1px solid #aaa;
-    background: linear-gradient(#fff, #ddd);
-    padding: 8px 13px;
-    font-size: 12px;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-.save {
-    border: 1px solid #bd5d08;
-    background: linear-gradient(#f6a23a, #e47c17);
-    color: white;
-    font-weight: bold;
-    padding: 8px 14px;
-    font-size: 12px;
-    cursor: pointer;
-    text-shadow: 1px 1px rgba(0,0,0,.3);
-}
-
-.footer {
-    width: 1080px;
-    margin: 25px auto;
-    color: #888;
-    font-size: 11px;
-    text-align: center;
-}
-
 @media(max-width: 1100px) {
-    .page,
-    .footer {
+    .page {
         width: calc(100% - 30px);
     }
 
@@ -369,112 +240,67 @@ body {
         </div>
     </div>
 
-    <div class="toolbar">
-        <button class="add-button" onclick="openModal()">Add Account</button>
+    <div class="section">
+        <div class="section-title">Offsales</div>
+        <div id="offsalesGrid" class="account-grid"></div>
     </div>
 
-    <div id="accountGrid" class="account-grid"></div>
+    <div class="section">
+        <div class="section-title">Limiteds</div>
+        <div id="limitedsGrid" class="account-grid"></div>
+    </div>
 
-</div>
-
-<div class="footer">
-    ROBLOX Account Gallery &nbsp;|&nbsp; 2013 Archive
-</div>
-
-<div id="overlay" class="overlay">
-
-    <div class="modal">
-
-        <div class="modal-header">
-            Add Account
-            <span class="close" onclick="closeModal()">×</span>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="field">
-                <label>Account Name</label>
-                <input id="accountName" type="text" placeholder="Example: Builderman">
-            </div>
-
-            <div class="field">
-                <label>Image URL</label>
-                <input id="accountImage" type="text" placeholder="https://example.com/avatar.png">
-            </div>
-
-            <div class="field">
-                <label>Profile URL</label>
-                <input id="accountProfile" type="text" placeholder="https://www.roblox.com/users/1/profile">
-            </div>
-
-            <div class="field">
-                <label>Description</label>
-                <textarea id="accountDescription" placeholder="Describe the account..."></textarea>
-            </div>
-
-            <div class="field">
-                <label>What it has</label>
-                <textarea id="accountItems" placeholder="Example: Classic hats, badges, limiteds..."></textarea>
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-            <button class="cancel" onclick="closeModal()">Cancel</button>
-            <button class="save" onclick="saveAccount()">Add Account</button>
-        </div>
-
+    <div class="section">
+        <div class="section-title">Stacked</div>
+        <div id="stackedGrid" class="account-grid"></div>
     </div>
 
 </div>
 
 <script>
-const defaultAccounts = [];
+const offsales = [
+    // "Account Name|2013|Image URL|Profile URL|Description|What it has"
+];
 
-function getAccounts() {
-    const saved = localStorage.getItem("roblox2013Accounts");
+const limiteds = [
+    // "Account Name|2013|Image URL|Profile URL|Description|What it has"
+];
 
-    if (!saved) {
-        localStorage.setItem("roblox2013Accounts", JSON.stringify(defaultAccounts));
-        return defaultAccounts;
-    }
+const stacked = [
+    // "Account Name|2013|Image URL|Profile URL|Description|What it has"
+];
 
-    try {
-        return JSON.parse(saved);
-    } catch {
-        return [];
-    }
-}
-
-function saveAccounts(accounts) {
-    localStorage.setItem("roblox2013Accounts", JSON.stringify(accounts));
-}
-
-function renderAccounts() {
-    const grid = document.getElementById("accountGrid");
-    const accounts = getAccounts();
-
-    grid.innerHTML = "";
+function renderAccounts(accounts, gridId) {
+    const grid = document.getElementById(gridId);
 
     if (!accounts.length) {
-        grid.innerHTML = '<div class="empty">No accounts have been added yet.</div>';
+        grid.innerHTML = '<div class="empty">No accounts added yet.</div>';
         return;
     }
 
-    accounts.forEach((account, index) => {
+    grid.innerHTML = "";
+
+    accounts.forEach(account => {
+        const data = account.split("|");
+
+        const name = data[0] || "";
+        const age = data[1] || "";
+        const image = data[2] || "";
+        const profile = data[3] || "";
+        const description = data[4] || "";
+        const items = data[5] || "";
+
         const card = document.createElement("div");
 
         card.className = "account-card";
 
         card.innerHTML = `
-            <button class="delete-button" onclick="deleteAccount(${index})">×</button>
-
             <div class="card-header">
                 Account Profile
             </div>
 
             <div class="avatar-area">
-                <img src="${escapeAttribute(account.image)}"
+                <img src="${escapeAttribute(image)}"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
 
                 <div class="avatar-fallback" style="display:none;">
@@ -485,11 +311,12 @@ function renderAccounts() {
             <div class="card-body">
 
                 <div class="username">
-                    ${escapeHTML(account.name)}
+                    ${escapeHTML(name)}
+                    <span class="account-age">(${escapeHTML(age)})</span>
                 </div>
 
                 <div class="description">
-                    ${escapeHTML(account.description)}
+                    ${escapeHTML(description)}
                 </div>
 
                 <div class="items-title">
@@ -497,14 +324,14 @@ function renderAccounts() {
                 </div>
 
                 <div class="items">
-                    ${escapeHTML(account.items)}
+                    ${escapeHTML(items)}
                 </div>
 
             </div>
 
             <div class="card-footer">
                 <a class="profile-button"
-                   href="${escapeAttribute(account.profile)}"
+                   href="${escapeAttribute(profile)}"
                    target="_blank">
                     View Profile
                 </a>
@@ -528,68 +355,9 @@ function escapeAttribute(value) {
     return escapeHTML(value);
 }
 
-function openModal() {
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("accountName").focus();
-}
-
-function closeModal() {
-    document.getElementById("overlay").style.display = "none";
-
-    document.getElementById("accountName").value = "";
-    document.getElementById("accountImage").value = "";
-    document.getElementById("accountProfile").value = "";
-    document.getElementById("accountDescription").value = "";
-    document.getElementById("accountItems").value = "";
-}
-
-function saveAccount() {
-    const name = document.getElementById("accountName").value.trim();
-    const image = document.getElementById("accountImage").value.trim();
-    const profile = document.getElementById("accountProfile").value.trim();
-    const description = document.getElementById("accountDescription").value.trim();
-    const items = document.getElementById("accountItems").value.trim();
-
-    if (!name || !image || !profile) {
-        alert("Please enter an account name, image URL, and profile URL.");
-        return;
-    }
-
-    const accounts = getAccounts();
-
-    accounts.push({
-        name: name,
-        image: image,
-        profile: profile,
-        description: description,
-        items: items
-    });
-
-    saveAccounts(accounts);
-    closeModal();
-    renderAccounts();
-}
-
-function deleteAccount(index) {
-    const accounts = getAccounts();
-
-    if (!confirm("Remove this account from the gallery?")) {
-        return;
-    }
-
-    accounts.splice(index, 1);
-
-    saveAccounts(accounts);
-    renderAccounts();
-}
-
-document.getElementById("overlay").addEventListener("click", function(event) {
-    if (event.target === this) {
-        closeModal();
-    }
-});
-
-renderAccounts();
+renderAccounts(offsales, "offsalesGrid");
+renderAccounts(limiteds, "limitedsGrid");
+renderAccounts(stacked, "stackedGrid");
 </script>
 
 </body>
