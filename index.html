@@ -101,7 +101,7 @@ body {
     padding: 9px 10px;
     font-size: 13px;
     color: #444;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .avatar-area {
@@ -127,13 +127,6 @@ body {
 
 .card-body {
     padding: 11px;
-}
-
-.username {
-    color: #1769aa;
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 6px;
 }
 
 .account-age {
@@ -250,7 +243,7 @@ body {
     </div>
 
     <div class="section">
-        <div class="section-title">Offsales</div>
+        <div class="section-title">Random?</div>
         <div id="offsalesGrid" class="account-grid"></div>
     </div>
 
@@ -268,20 +261,23 @@ body {
 
 <script>
 const offsales = [
-    "ExampleAccount|2013|https://tr.rbxcdn.com/30DAY-AvatarHeadshot-Png/150/150/AvatarHeadshot/Webp/noFilter|https://www.roblox.com/users/123456/profile|Example account description|https://tr.rbxcdn.com/item1.png|https://tr.rbxcdn.com/item2.png|https://tr.rbxcdn.com/item3.png|https://tr.rbxcdn.com/item4.png"
+    "Tixidise|2011|https://tr.rbxcdn.com/30DAY-Avatar-FD6AEDE1CADBCEAF3AC4275693A2BCCC-Png/720/720/Avatar/Webp/noFilter|https://www.roblox.com/users/14759501/profile|2011 dev account with 140K+ Total place visits red sparkle time bandana (8000 robux item) and sleek sunglasses (1500)|https://tr.rbxcdn.com/180DAY-3846a4470225946a33e14289ef93dc8b/420/420/FaceAccessory/Webp/noFilter|https://tr.rbxcdn.com/180DAY-37b4d0d1afcbd09026e073bfacff028e/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-f5b04f88662ff71f3938e1937f106fdd/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-f953ff72160d14bae156849899427f38/420/420/FaceAccessory/Webp/noFilter",
 ];
 
 const limiteds = [
 ];
 
 const stacked = [
+    "7ZPM|2020|https://tr.rbxcdn.com/30DAY-Avatar-BE473F6A5D68A8A1C7228705494E3F2B-Png/720/720/Avatar/Webp/noFilter|https://www.roblox.com/users/1449259706/profile|stacked as nigger 2020 account with 10 pages of hats and like all 2020 eggs and lots of toycodes including ones 80$+ ig|https://tr.rbxcdn.com/180DAY-2c7e6a5cbeec6ea6a43548815a041e32/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-213f6296a789c14d96db49dede934864/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-978e2126a665d07120c2c7574b40074e/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/30DAY-Avatar-07F04DFE1A83E66342DB8EA4F764C43E-Png/420/420/Avatar/Webp/noFilter",
+    "Reset2241079294|2020|https://tr.rbxcdn.com/30DAY-Avatar-0393A899BAE342C1F2C26CA56D1DE07B-Png/720/720/Avatar/Webp/noFilter|https://www.roblox.com/users/2241079294/profile|stacked 2020 with like 10 items that are atleast 1000+ robux has sparkle time bundle, just lots of fucken expensive robux items|https://tr.rbxcdn.com/30DAY-Avatar-C781BF593233D0822D2464A4FAC53220-Png/420/420/Avatar/Webp/noFilter|https://tr.rbxcdn.com/180DAY-0413a25153483792f0bce947e9f922e5/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-2096cdf64fcf0bb3cfca584bdb95fd6a/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-f953ff72160d14bae156849899427f38/420/420/FaceAccessory/Webp/noFilter",
+    "ROBLOXianEnergyCore|2013|https://tr.rbxcdn.com/30DAY-Avatar-BD8E21229BDCC91D5E24AFF49CCAA4FF-Png/720/720/Avatar/Webp/noFilter|https://www.roblox.com/users/40922102/profile|stacked 2013 account 5 pages of hats with full 2017 egg hunt completed 5 different visors|https://tr.rbxcdn.com/180DAY-70f03940f4ab6301fd1fcab0a981bd9e/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-fda94fe4d563891730a5cda00c1da675/420/420/Hat/Webp/noFilter|https://tr.rbxcdn.com/180DAY-6f7e94f24e6e5f1856ecf59e9d962a62/420/420/Gear/Webp/noFilter|https://tr.rbxcdn.com/180DAY-37b4d0d1afcbd09026e073bfacff028e/420/420/Hat/Webp/noFilter",
 ];
 
 function renderAccounts(accounts, gridId) {
     const grid = document.getElementById(gridId);
 
     if (!accounts.length) {
-        grid.innerHTML = '<div class="empty">No accounts added yet.</div>';
+        grid.innerHTML = '<div class="empty">no accounts here yet... :/</div>';
         return;
     }
 
@@ -306,7 +302,8 @@ function renderAccounts(accounts, gridId) {
 
         card.innerHTML = `
             <div class="card-header">
-                Account Profile
+                ${escapeHTML(name)}
+                <span class="account-age">(${escapeHTML(age)})</span>
             </div>
 
             <div class="avatar-area">
@@ -319,11 +316,6 @@ function renderAccounts(accounts, gridId) {
             </div>
 
             <div class="card-body">
-
-                <div class="username">
-                    ${escapeHTML(name)}
-                    <span class="account-age">(${escapeHTML(age)})</span>
-                </div>
 
                 <div class="description">
                     ${escapeHTML(description)}
